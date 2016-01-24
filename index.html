@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+   <meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="description" content="Backbone-Parse-ES6 Global / ES5 Todos -- A canonical TODOs demo for `backbone-parse-es6` using the global ES5 bundle.">
+   <meta name="viewport" content="width=device-width, initial-scale=0.75">
+   <title>Backbone-Parse-ES6 Global / ES5 Todos</title>
+
+   <!-- Icons for web apps created by http://realfavicongenerator.net/ -->
+
+   <!-- Add to homescreen for Chrome on Android -->
+   <meta name="mobile-web-app-capable" content="yes">
+   <link rel="icon" type="image/png" href="site/images/icons/android-chrome-192x192.png" sizes="192x192" data-cdn="true">
+   <link rel="manifest" href="site/images/icons/manifest.json">
+
+   <!-- Add to homescreen for Safari on iOS -->
+   <meta name="apple-mobile-web-app-capable" content="yes">
+   <meta name="apple-mobile-web-app-status-bar-style" content="black">
+   <meta name="apple-mobile-web-app-title" content="Todos">
+   <link rel="apple-touch-icon" sizes="57x57" href="site/images/icons/apple-touch-icon-57x57.png">
+   <link rel="apple-touch-icon" sizes="60x60" href="site/images/icons/apple-touch-icon-60x60.png">
+   <link rel="apple-touch-icon" sizes="72x72" href="site/images/icons/apple-touch-icon-72x72.png">
+   <link rel="apple-touch-icon" sizes="76x76" href="site/images/icons/apple-touch-icon-76x76.png">
+   <link rel="apple-touch-icon" sizes="114x114" href="site/images/icons/apple-touch-icon-114x114.png">
+   <link rel="apple-touch-icon" sizes="120x120" href="site/images/icons/apple-touch-icon-120x120.png">
+   <link rel="apple-touch-icon" sizes="144x144" href="site/images/icons/apple-touch-icon-144x144.png">
+   <link rel="apple-touch-icon" sizes="152x152" href="site/images/icons/apple-touch-icon-152x152.png">
+   <link rel="apple-touch-icon" sizes="180x180" href="site/images/icons/apple-touch-icon-180x180.png">
+   <link rel="mask-icon" href="site/images/icons/safari-pinned-tab.svg" color="#5bbad5">
+
+   <!-- Tile icon for Win 8/10 (144x144 + tile color) -->
+   <meta name="msapplication-TileColor" content="#2d89ef">
+   <meta name="msapplication-TileImage" content="site/images/icons/mstile-144x144.png">
+   <meta name="msapplication-config" content="site/images/icons/browserconfig.xml">
+   <meta name="theme-color" content="#ffffff">
+
+   <!-- Favicon icon -->
+   <link rel="shortcut icon" href="site/images/icons/favicon.ico" type="image/x-icon">
+   <link rel="icon" type="image/png" href="site/images/icons/favicon-16x16.png" sizes="16x16">
+   <link rel="icon" type="image/png" href="site/images/icons/favicon-32x32.png" sizes="32x32">
+   <link rel="icon" type="image/png" href="site/images/icons/favicon-194x194.png" sizes="194x194">
+   <link rel="icon" type="image/png" href="site/images/icons/favicon-96x96.png" sizes="96x96">
+
+   <!-- App stylesheet -->
+   <link href="site/css/todos.css" media="all" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+
+<noscript>We apologize, but `backbone-parse-es6-todos-global-es5` requires javascript.</noscript>
+
+<!-- Todo App Interface -->
+
+<div id="todoapp">
+   <div class="title">
+      <h1>Backbone-Parse-ES6 Todos</h1>
+   </div>
+
+   <div class="content">
+   </div>
+</div>
+
+<div id="credits">
+   Powered by <a href="https://github.com/typhonjs/backbone-parse-es6" target="_blank">backbone-parse-es6</a> using the global ES5 bundle and <a href="https://www.parse.com" target="_blank">Parse</a>.<br /><br />
+   This is a rhetorical demo showing global JS usage and we recommend that you check out the ES6 & JSPM / SystemJS version: <a href="https://github.com/typhonjs-demos/backbone-parse-es6-todos" target="_blank">backbone-parse-es6-todos</a>
+</div>
+
+<!-- Load Underscore & jQuery from CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.js"></script>
+
+<!-- Loads additional jQuery events including `doubletap` which allows editing items on mobile devices -->
+<script src="https://cdn.rawgit.com/ngryman/jquery.finger/master/dist/jquery.finger.min.js"></script>
+
+
+<!-- Load Global ES5 backbone-parse bundle -->
+<script src="site/js/backbone-parse.js"></script>
+
+<!-- Load and start the TODOS app -->
+<script src="site/js/App.js"></script>
+
+<!-- Templates -->
+
+<script type="text/template" id="template-item">
+   <li class="<%= done ? 'completed' : '' %>">
+      <div class="view">
+         <input class="toggle" type="checkbox" <%= done ? 'checked="checked"' : '' %>>
+         <label class="todo-content"><%= _.escape(content) %></label>
+         <button class="todo-destroy"></button>
+      </div>
+      <input class="edit" value="<%= _.escape(content) %>">
+   </li>
+</script>
+
+<script type="text/template" id="template-login">
+   <header id="header"></header>
+   <div class="login">
+      <form class="login-form">
+         <h2>Log In</h2>
+         <div class="error" style="display:none"></div>
+         <input type="text" id="login-username" placeholder="Username" />
+         <input type="password" id="login-password" placeholder="Password" />
+         <button>Log In</button>
+      </form>
+
+      <form class="signup-form">
+         <h2>Sign Up</h2>
+         <div class="error" style="display:none"></div>
+         <input type="text" id="signup-username" placeholder="Username" />
+         <input type="password" id="signup-password" placeholder="Create a Password" />
+         <button>Sign Up</button>
+      </form>
+   </div>
+</script>
+
+<script type="text/template" id="template-manage-todos">
+   <div id="user-info">
+      Signed in as <%= username %> (<a href="#" class="log-out">Log out</a>)
+   </div>
+
+   <div class="section">
+
+      <header id="header">
+         <input id="new-todo" placeholder="What needs to be done?" type="text" />
+      </header>
+
+      <div id="main">
+         <input id="toggle-all" type="checkbox">
+         <label for="toggle-all">Mark all as complete</label>
+
+         <ul id="todo-list">
+            <img class='spinner' />
+         </ul>
+      </div>
+
+      <div id="todo-stats"></div>
+   </div>
+</script>
+
+<script type="text/template" id="template-stats">
+   <footer id="footer">
+      <span id="todo-count"><strong><%= remaining %></strong> <%= remaining == 1 ? 'item' : 'items' %> left</span>
+      <ul id="filters">
+         <li>
+            <a href="javascript:void(0)" id="all" class="selected">All</a>
+         </li>
+         <li>
+            <a href="javascript:void(0)" id="active">Active</a>
+         </li>
+         <li>
+            <a href="javascript:void(0)" id="completed">Completed</a>
+         </li>
+      </ul>
+      <button id="clear-completed">Clear completed (<%= done %>)</button>
+   </footer>
+</script>
+
+</body>
+</html>
