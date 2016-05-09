@@ -8,4 +8,4 @@ work with backbone-parse-es6 and JSPM / SystemJS.
 
 More info coming soon.
 
-Live demo here: http://js.demos.typhonrt.org/backbone-parse-es6-todos-global-es5/
+Live demo here: https://demos.typhonjs.io/typhonjs-demos/backbone-parse-es6-todos-global-es5/
